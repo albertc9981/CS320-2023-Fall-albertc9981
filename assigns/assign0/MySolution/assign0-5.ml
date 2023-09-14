@@ -29,14 +29,8 @@ or your solution is disqualified.
 
 let stringrev (cs: string): string =
   let len = string_length cs in
-  let rec revhelper i revresult =
-    if i < 0 then
-      revresult
-    else
-      let c = string_get (cs, i) in
-      revhelper (i - 1) (revresult ^ str c)
-  in
-  revhelper (len - 1) ""
+  let rev = string_init len (fun i -> string_get (cs, (len - 1 - i))) in
+  rev
 ;;
 
 (* end of [CS320-2023-Fall-assign0.ml] *)
