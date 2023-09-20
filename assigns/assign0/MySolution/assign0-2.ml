@@ -33,6 +33,5 @@ let isPrime (n0: int): bool =
   else if n0 <= 3 then true
   else if n0 mod 2 = 0 || n0 mod 3 = 0 then false
   else helper n0 5
-;;
 
 (* ****** ****** *)
