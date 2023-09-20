@@ -14,9 +14,16 @@
    overall code flow/logic is the same*)
 let isPrime(n) =
   let test(i:int): bool = 
-    if i * i > n then true
-    else if n mod i = 0 then false
-    else test (i + 1)
+    if i <= 1 then false
+    else if i <= 3 then true
+    else if i mod 2 = 0 || i mod 3 = 0 then false
+    else
+      let rec helper divisor =
+        if divisor * divisor > i then true
+        else if i mod divisor = 0 then false
+        else helper (divisor + 2)
+      in
+      helper 5
   in
   if n < 2 then false else int1_forall(n)(test)
 
