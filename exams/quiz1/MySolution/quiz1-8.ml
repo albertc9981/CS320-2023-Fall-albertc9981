@@ -24,7 +24,7 @@ let sort5: int*int*int*int*int -> int*int*int*int*int =
     let lst_new = List.sort compare lst in
     match lst_new with
       |[x; y; z ;w ;u] -> (x, y, z, w, u)
-      | _ -> failwith "Input should countain 5 ints"
+      | _ -> failwith "Input should contain 5 ints"
   
 
 (* ************************************************ *)
