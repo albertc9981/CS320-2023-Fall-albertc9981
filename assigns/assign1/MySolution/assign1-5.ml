@@ -23,31 +23,30 @@ For instance, given "1234511111", the function
 string_longest_ascend returns "111111".
 *)
 
-let rec helper xs start_i curr_i long_i =
-  let xs_len = string_length xs in
-  if curr_i = xs_len then
-    let longest_sub =
-      string_init (longest_i - start_i + 1) (fun i -> xs.[start_i + i])
-    in
-    longest_sub
-  else
-    let curr_char = xs.[curr_i] in
-    let prev_char = xs.[curr_i - 1] in
-    if ord curr_char >= ord prev_char then
-      let new_longest_i =
-        if curr_i - start_i + 1 > longest_i - start_i + 1 then curr_i else longest_i
-      in
-      helper xs start_i (curr_i + 1) new_longest_i
-    else
-      let new_start_i = curr_i in
-      helper xs new_start_i (curr_i + 1) longest_i
-
 let string_longest_ascend xs =
-  match xs with
-  | "" -> ""
-  | _ ->
-      let start_i = 0 in
-      let curr_i = 1 in
-      let longest_i = 0 in
-      helper xs start_i curr_i longest_i
+  let len = string_length xs in
+  if len = 0 then
+    ""
+  else
+    let rec find_longest_ascend start_idx current_idx longest current =
+      if current_idx = len then
+        if string_length current > string_length longest then
+          current
+        else
+          longest
+      else
+        let current_char = xs.[current_idx] in
+        let prev_char = xs.[current_idx - 1] in
+        if current_char >= prev_char then
+          find_longest_ascend start_idx (current_idx + 1) longest (current ^ String.make 1 current_char)
+        else
+          let new_longest =
+            if string_length current > string_length longest then
+              current
+            else
+              longest
+          in
+          find_longest_ascend current_idx (current_idx + 1) new_longest (String.make 1 current_char)
+    in
+    find_longest_ascend 0 1 (String.make 1 xs.[0]) (String.make 1 xs.[0])
 (* ****** ****** *)
