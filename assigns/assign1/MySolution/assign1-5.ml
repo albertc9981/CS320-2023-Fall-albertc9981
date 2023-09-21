@@ -35,10 +35,10 @@ let string_longest_ascend xs =
         else
           longest
       else
-        let current_char = xs.[current_idx] in
-        let prev_char = xs.[current_idx - 1] in
+        let current_char = String.get xs current_idx in
+        let prev_char = String.get xs (current_idx - 1) in
         if current_char >= prev_char then
-          find_longest_ascend start_idx (current_idx + 1) longest (current ^ String.make 1 current_char)
+          find_longest_ascend start_idx (current_idx + 1) longest (current ^ (String.make 1 current_char))
         else
           let new_longest =
             if string_length current > string_length longest then
@@ -48,5 +48,5 @@ let string_longest_ascend xs =
           in
           find_longest_ascend current_idx (current_idx + 1) new_longest (String.make 1 current_char)
     in
-    find_longest_ascend 0 1 (String.make 1 xs.[0]) (String.make 1 xs.[0])
+    find_longest_ascend 0 1 (String.make 1 (String.get xs 0)) (String.make 1 (String.get xs 0))
 (* ****** ****** *)
